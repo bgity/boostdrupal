@@ -1,0 +1,33 @@
+<?php
+
+function alterform_init() {
+    if (arg(2) == 'contact-us') {
+        drupal_add_js('sites/all/themes/bsubtheme/js/custom.js', 'file');
+        drupal_add_css('sites/all/themes/bsubtheme/css/custom.css', 'file');
+    }
+}
+
+function alterform_form_alter(&$form, &$form_state, $form_id) {
+    //echo '<pre>'; print_r($form); exit;
+    if ($form_id == 'contact_us_node_form') {
+        $form['field_email_address']['und'][0]['value']['#attributes']['placeholder'] = t('E-mail Address');
+        $form['actions']['submit']['#value'] = t('Send Message');
+        $form['field_name']['und'][0]['value']['#attributes']['class'][] = 'email-address';
+        //echo '<pre>'; print_r($form['field_email_address']); exit;
+    }
+}
+
+function alterform_menu() {
+
+    $items['cancel-reservation'] = array(
+        'page callback' => 'my_function',
+        'type' => MENU_CALLBACK,
+        'access arguments' => TRUE,
+    );
+
+    return $items;
+}
+
+function my_function() {
+    echo "asdasdasd";
+}
